@@ -63,6 +63,8 @@ For example, a CBC report can contain readings such as:
 The values, units and reference ranges are displayed on the report details screen whenever they are available in the response.
 
 The data models are based on the FHIR R4 structure.
+
+# Project Structure
 **HealthCareApp**/
  **App**/
 	 HealthCareApp.swift
