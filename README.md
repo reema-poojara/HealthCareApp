@@ -6,6 +6,33 @@ For this assignment I have focused on to main sections: **Home** and **Records**
 
 The Home screen is intentional kept blank as requested in the assignment. The Records section allows user to browse their available lab reports and view the details of individual report.
 
+# Getting Started
+
+# Requirements
+- Xcode 26 or later
+- iOS deployment target as configured in the project
+- Swift and SwiftUI
+- Internet connection for fetching remote FHIR data
+
+# Installation
+1. Clone this repository:
+	bash
+	git clone reema-poojara/HealthCareApp: Demo Project
+
+2. Open the project in Xcode:
+ bash
+ open YourHealthNSDemo.xcodeproj
+
+3. Allow Swift Package Manager to resolve the project dependencies.
+4. Select the application scheme and an iOS simulator or connected device.
+5. Build and run the application.
+
+# Dependencies
+ModelsR4: Used to decode and work with FHIR R4 resources.
+SwiftUI: Used to build the application interface.
+
+The project uses Swift Package Manager for dependency management.
+
 # App Flow
 
 1. **Home** A blank screen.
