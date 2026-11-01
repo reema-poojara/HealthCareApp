@@ -103,7 +103,40 @@ The data models are based on the FHIR R4 structure.
 		**Components**/
 			RecordCategoryCardView
  Tests/
- README.md
+
+ # FHIR R4 Integration
+
+I have added FHIR R4 support to the project to demonstrate how healthcare records can be fetched and handled using a standard healthcare data format.
+
+For this integration, I used the FHIRModels Swift library (ModelsR4) instead of relying only on my own Codable models.
+
+# What I implemented
+Fetch FHIR JSON data from an API using the existing APIClient.
+Decode FHIR Bundle responses using the ModelsR4 library.
+Read DiagnosticReport and Observation resources from the Bundle.
+Match observations with their corresponding diagnostic reports using resource references.
+Extract test names, results, units, and normal reference ranges.
+Read the actual report date instead of using the current date.
+Convert the decoded FHIR data into the existing PatientRecord and PatientVital models.
+How it works in the project
+
+I kept the FHIR integration separate from the existing application models. The library is only used to decode the FHIR response. After decoding, FHIRRecordMapper converts the data into the models already used by the application.
+
+# The data flow is:
+
+FHIR JSON API → APIClient → FHIRDecoder → FHIRRecordMapper → PatientRecord → SwiftUI
+
+# Why I used FHIRModels
+
+FHIR is a commonly used standard for exchanging healthcare information. Using an existing library makes it easier to work with FHIR resources without manually defining every resource structure.
+
+I also wanted to keep the existing application architecture unchanged. The UI and business logic continue to use the project's own models, so they are not directly dependent on the FHIR library.
+
+# Current Scope
+
+For this implementation, I focused on FHIR R4 DiagnosticReport and Observation resources. This covers the basic flow of fetching, decoding, mapping, and displaying diagnostic and laboratory records.
+
+The integration can be extended later to support additional FHIR resources.
 
 # Design and Accesssibility
 I have created a small design system to maintain a consistent look throughout the application.
