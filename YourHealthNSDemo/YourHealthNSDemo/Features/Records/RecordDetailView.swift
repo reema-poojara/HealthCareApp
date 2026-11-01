@@ -105,7 +105,7 @@ struct RecordDetailView: View {
             VStack(alignment: .leading, spacing: 6) {
 
                 Text(title)
-                    .font(.headline)
+                    .font(AppTheme.Fonts.headline)
                     
                 Text(value)
                     .font(AppTheme.Fonts.caption)

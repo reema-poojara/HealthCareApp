@@ -69,7 +69,7 @@ struct PatientReportsListView: View {
         private func recordRow(_ record: PatientRecord) -> some View {
             HStack(spacing: 12){
                 Image(systemName: "doc.text.magnifyingglass")
-                    .font(.title2)
+                    .font(AppTheme.Fonts.title2)
                     .foregroundStyle(AppTheme.Colors.primary)
                     .frame(width: 44,height: 44)
                     .background(AppTheme.Colors.secondary,in: RoundedRectangle(cornerRadius: 12))
@@ -87,7 +87,7 @@ struct PatientReportsListView: View {
                 }
                 Spacer(minLength: 8)
                 Image(systemName: "chevron.right")
-                    .font(.title2)
+                    .font(AppTheme.Fonts.title2)
                     .foregroundStyle(AppTheme.Colors.textSecondary)
                     .accessibilityHidden(true)
             }

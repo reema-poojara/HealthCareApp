@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ModelsR4
 
 struct RemoteRecordsRepository : RecordsRepository{
     
@@ -16,12 +17,31 @@ struct RemoteRecordsRepository : RecordsRepository{
         self.apiClient = apiClient
     }
     
-    func fetchRecords()async throws ->[PatientRecord] {
-        let data : Data = try await apiClient.getRawData(from: endPoint!)
-        let resources = try decodeResource(from: data)
+    func fetchRecords() async throws ->[PatientRecord] {
+        guard let endPoint else {
+            throw APIError.invalidURL
+        }
+        let data : Data = try await apiClient.getRawData(from: endPoint)
+        let resourceType = try FHIRDecoder.recourceType(from: data)
         
-        return FHIRRecordMapper.map(resources: resources)
+        switch resourceType {
+            
+            case "Bundle":
+                let bundle = try FHIRDecoder.decodeFHIR(from: data)
+                return FHIRRecordMapper.mapFHIRBundle(bundle)
+            case "DiagnosticReport", "Observation":
+                let resources = try decodeResource(from: data)
+                return FHIRRecordMapper.map(resources: resources)
+            default:
+                throw APIError.missingResource("Expected FHIR Bundle or resource")
+        }
     }
+//    func fetchRecords()async throws ->[PatientRecord] {
+//        let data : Data = try await apiClient.getRawData(from: endPoint!)
+//        let resources = try decodeResource(from: data)
+//        
+//        return FHIRRecordMapper.map(resources: resources)
+//    }
     
     private func decodeResource(from data: Data) throws -> [FHIRResource] {
         let resourceType = try FHIRDecoder.recourceType(from:data)

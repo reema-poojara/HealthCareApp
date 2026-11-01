@@ -6,9 +6,21 @@
 //
 
 import Foundation
+import ModelsR4
+internal import FMCore
 
 
 enum FHIRDecoder{
+    
+    //Decode FHIR bundle using Apple FHIRModels
+    static func decodeFHIR(from data:Data) throws -> ModelsR4.Bundle{
+        let decoder = JSONDecoder.fhirModelsReadyDecoder()
+        do {
+            return try decoder.decode(ModelsR4.Bundle.self,from: data)
+        } catch {
+            throw APIError.decodingFailed(error)
+        }
+    }
     
     // Decode REsources
     static func decodeResource(from data:Data) throws -> FHIRResource {
@@ -84,60 +96,3 @@ enum FHIRDecoder{
         }
     }
 }
-/*
-struct FHIRBundle:Codable{
-    let resourceType:String
-    let entry:[FHIRBundleEntry]?
-}
-
-struct FHIRBundleEntry:Codable{
-    let fullUrl:String?
-    let resource:FHIRResource?
-}
-
-struct FHIRResource:Codable {
-    let resourceType:String
-    let id:String?
-    let status:String?
-    let effectiveDateTime:String?
-    let performer:[FHIRRefrence]?
-    let code:FHIRCodeableConcept?
-    let text:FHIRText?
-    let result:[FHIRRefrence]?
-    let valueQuantity:FHIRValueQuantity?
-    let refrenceRange:[FHIRRefrenceRange]?
-}
-
-struct FHIRText:Codable{
-    let status:String?
-    let div:String?
-}
-
-struct FHIRCodeableConcept:Codable{
-    let coding:[FHIRCoding]?
-    let text:String?
-}
-
-struct FHIRCoding:Codable{
-    let system:String?
-    let code:String?
-    let display:String?
-}
-struct FHIRRefrence:Codable{
-    let reference:String?
-    let display:String?
-}
-
-struct FHIRValueQuantity:Codable{
-    let value:Double?
-    let unit:String?
-    let system:String?
-    let code:String?
-}
-
-struct FHIRRefrenceRange:Codable{
-    let low:FHIRValueQuantity?
-    let high:FHIRValueQuantity?
-    let text:[String]?
-}
-*/

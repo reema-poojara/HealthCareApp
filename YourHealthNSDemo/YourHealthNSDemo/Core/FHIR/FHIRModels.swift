@@ -104,9 +104,9 @@ struct FHIRResource:Decodable {
             case let (lower?,upper?):
                 return "\(lower) - \(upper)"
             case let (lower?,nil):
-                return "≥ \(lower)"
+                return ">= \(lower)"
             case let (nil,upper?):
-                return "≤  \(upper)"
+                return "<=  \(upper)"
             default:
                 return nil
             }

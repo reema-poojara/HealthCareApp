@@ -15,22 +15,18 @@ struct RecordCategoryCardView: View {
         
         HStack(spacing:16){
             Image(systemName: category.systemImage)
-                .font(.title2)
+                .font(AppTheme.Fonts.title2)
                 .foregroundStyle(AppTheme.Colors.primary)
                 .frame(width: 52,height: 52)
-            
-//                .clipShape(
-//                    RoundedRectangle(cornerRadius: 15)
-//                )
                 .accessibilityHidden(true)
             
             VStack(alignment:.leading,spacing: 6){
                 Text(category.title)
-                    .font(.headline)
+                    .font(AppTheme.Fonts.headline)
                     .foregroundStyle(AppTheme.Colors.textPrimary)
                 
                 Text(category.description)
-                    .font(.caption)
+                    .font(AppTheme.Fonts.caption)
                     .foregroundStyle(AppTheme.Colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -44,7 +40,7 @@ struct RecordCategoryCardView: View {
         .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 5)
         .padding()
         .accessibilityElement(children: .combine)
-        .accessibilityHint("Opens laboratory and diagnostic records")
+        .accessibilityHint("Double tap to opens laboratory and diagnostic records")
     }
 }
 
