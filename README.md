@@ -69,7 +69,7 @@ The data models are based on the FHIR R4 structure.
  **App**/
 	 HealthCareApp.swift
 	 AppContainer.swift
-	 AppRouter.swift
+	 ContentView.swift
 **Core**/
 	**DesignSystem**/
 		 AppTheme.swift
